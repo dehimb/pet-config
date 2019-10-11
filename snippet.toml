@@ -1,0 +1,89 @@
+[[snippets]]
+  description = "Run steghide docker container and run steghide on provided file"
+  command = "docker run -it --rm -v \"$(pwd):/src\" bartimar/steghide  extract -sf /src/<filename> -xf /src/steghide_results"
+  output = ""
+
+[[snippets]]
+  description = "Run nmap full tcp scan with standart scripts and version detection"
+  command = "nmap -sC -sV -v -oA nmap/tcp -p- <target>"
+  output = ""
+
+[[snippets]]
+  description = "Run nmap 1000 ports udp scan with standart scripts and version detection"
+  command = "sudo nmap -sU -sC -sV -v -oA nmap/udp <target>"
+  output = ""
+
+[[snippets]]
+  description = "Run wpscan with all flags"
+  command = "wpscan --url <https://target.url> -e -o wpscan.log --stealthy"
+  output = ""
+
+[[snippets]]
+  description = "Run gobuster"
+  command = "gobuster -u <http://target.url> -w ~/hack/wordlists/directory-list-2.3-medium.txt -t 20 -o gobuster.txt"
+  output = ""
+
+[[snippets]]
+  description = "Run patator"
+  command = "patator http_fuzz url=<http://target> method=POST body='username=admin&password=FILE0' 0=~/hack/wordlists/SecLists/Passwords/Common-Credentials/10-million-password-list-top-10000.txt accept_cookie=1 -x ignore:fgrep='invalid'"
+  output = ""
+
+[[snippets]]
+  description = "Connect work via ssh with database ports forwarding"
+  command = "docker exec -it php-fpm ssh -4 -L 3306:localhost:3306 -L 27017:localhost:27017 -L 11211:localhost:11211 -L 4730:localhost:4730 dima@work.5nix.com"
+  output = ""
+
+[[snippets]]
+  description = "Start simple http server"
+  command = "python -m SimpleHTTPServer 80"
+  output = ""
+
+[[snippets]]
+  description = "Run nmap vulnscan"
+  command = "nmap --script vuln -oA nmap/vulnscal <target>"
+  output = ""
+
+[[snippets]]
+  description = "ssl check via sslyze"
+  command = "python -m sslyze --regular <target>"
+  output = ""
+
+[[snippets]]
+  description = "Run hashcat container"
+  command = "docker run -it -v /Users/dehimb:/home dizcza/docker-hashcat:intel-cpu /bin/bash"
+  output = ""
+
+[[snippets]]
+  description = "Padding oracle attack"
+  command = "docker run 4armed/padbuster "
+  output = ""
+
+[[snippets]]
+  description = "Generate gettext translations"
+  command = "find . -type f \\( -name '*.php' -or -name '*.phtml' \\) -not -path \"/vendor/\" | xargs xgettext --keyword=__ --language=PHP --from-code=UTF-8 -o messages.pot"
+  output = ""
+
+[[snippets]]
+  description = "The harvester"
+  command = "theHarvester -d <target> -s -v -n -b baidu,bing,bingapi,censys,crtsh,dnsdumpster,dogpile,duckduckgo,github-code,google,hunter,intelx,linkedin,linkedin_links,netcraft,otx,securityTrails,threatcrowd,trello,twitter,vhost,virustotal,yahoo"
+  output = ""
+
+[[snippets]]
+  description = "Extract uniq names from harvester emails list"
+  command = "awk -F \"\\\"*,\\\"*\" '{print $2}' <file.csv> | uniq | sed -n '/@/p' | sed 's/@.*//' > harvested-names.txt"
+  output = ""
+
+[[snippets]]
+  description = "Amass enum target"
+  command = "amass enum --passive -d <target> -json <target>.json"
+  output = ""
+
+[[snippets]]
+  description = "Probe for http(s) services from amass scan results"
+  command = "jq .name <target>.json | sed \"s/\\\"//g\" | httprobe -c 60 | tee -a amass-domains.txt"
+  output = ""
+
+[[snippets]]
+  description = "Remove http and https from file, remove duplicates"
+  command = "cat <file> | sed -E 's/http\\:\\/\\/|https\\:\\/\\///g' | sort -u > <target>"
+  output = ""
